@@ -9,6 +9,16 @@ service:
                     identifier: guestbook
                     type: K8sManifest
                     spec:
+                        apiVersion: v1
+                        kind: Service
+                        metadata:
+                          name: guestbook-ui
+                        spec:
+                          ports:
+                          - port: 80
+                            targetPort: 80
+                          selector:
+                            app: guestbook-ui
                       store:
                         type: Github
                         spec:

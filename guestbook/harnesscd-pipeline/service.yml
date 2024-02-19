@@ -19,16 +19,26 @@ service:
                             targetPort: 80
                           selector:
                             app: guestbook-ui
-                      store:
-                        type: Github
+                        apiVersion: v1
+                        kind: Service
+                        metadata:
+                          name: guestbook-ui
                         spec:
-                            connectorRef: harnessgitconnector
-                            gitFetchType: Branch
-                            paths:
-                                - guestbook/guestbook-ui-deployment.yaml
-                                - guestbook/guestbook-ui-svc.yaml
-                            repoName: harnesscd-example-apps
-                            branch: master
-                        skipResourceVersioning: false
-                        enableDeclarativeRollback: false
+                          ports:
+                          - port: 80
+                            targetPort: 80
+                          selector:
+                            app: guestbook-ui        
+#                      store:
+#                        type: Github
+#                        spec:
+#                            connectorRef: harnessgitconnector
+#                            gitFetchType: Branch
+#                            paths:
+#                                - guestbook/guestbook-ui-deployment.yaml
+#                                - guestbook/guestbook-ui-svc.yaml
+#                            repoName: harnesscd-example-apps
+#                            branch: master
+#                        skipResourceVersioning: false
+#                        enableDeclarativeRollback: false
     gitOpsEnabled: false
